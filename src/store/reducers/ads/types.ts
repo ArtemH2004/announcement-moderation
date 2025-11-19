@@ -1,5 +1,6 @@
 import type { PriorityEnum } from "@/common/enums/PriorityEnum";
 import type { StatusEnum } from "@/common/enums/StatusEnum";
+import type { IPagination } from "@/store/reducers/pagination/types";
 
 export interface IAdsShortInfo {
   id: number;
@@ -12,14 +13,9 @@ export interface IAdsShortInfo {
   priority: PriorityEnum;
 }
 
-export interface IAdsPagination {
-  currentPage: number;
-  totalPages: number;
-  totalItems: number;
-  itemsPerPage: number;
-}
+
 
 export interface IAds {
   ads: IAdsShortInfo[];
-  pagination: IAdsPagination;
+  pagination: IPagination;
 }
