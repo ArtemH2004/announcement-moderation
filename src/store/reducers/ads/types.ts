@@ -11,3 +11,15 @@ export interface IAdsShortInfo {
   status: StatusEnum;
   priority: PriorityEnum;
 }
+
+export interface IAdsPagination {
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
+  itemsPerPage: number;
+}
+
+export interface IAds {
+  ads: IAdsShortInfo[];
+  pagination: IAdsPagination;
+}
