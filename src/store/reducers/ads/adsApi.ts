@@ -3,14 +3,11 @@ import { AdsServiceEndpoints } from "@/api/api.ts";
 import { api } from "@/api/api.ts";
 
 export const adsApi = {
-  async getAll() // page: number = 1,
-  // limit: number = 5
-  {
+  async getAll(page: number, limit: number) {
     try {
-      const response = await api.get(AdsServiceEndpoints.ALL);
-      //   const response = await api.get(
-      //     `${EateryServiceEndpoints.ALL}?${cityParam}${eateryParam}${typeParam}${priceParam}${pageParam}${limitParam}`
-      //   );
+      const response = await api.get(
+        `${AdsServiceEndpoints.ALL}?page=${page}&limit=${limit}`
+      );
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) throw new Error("Объявления не найдены");
