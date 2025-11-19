@@ -1,11 +1,7 @@
-import { PageWrapper } from "@/common/components/wrapper/PageWrapper";
+import RoutesProvider from "@/router/RoutesProvider";
 
 function App() {
-  return (
-    <PageWrapper>
-      <span className="text-2xl">Привет</span>
-    </PageWrapper>
-  );
+  return <RoutesProvider />;
 }
 
 export default App;
