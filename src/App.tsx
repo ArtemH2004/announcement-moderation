@@ -1,5 +1,7 @@
+import RoutesProvider from "@/router/RoutesProvider";
+
 function App() {
-  return <><button>hi</button><span className="text-2xl">Привет</span></>;
+  return <RoutesProvider />;
 }
 
 export default App;
