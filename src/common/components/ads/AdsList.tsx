@@ -1,7 +1,8 @@
 import { AdsItem } from "@/common/components/ads/AdsItem";
-import { adsApi } from "@/store/reducers/ads/AdsApi";
+import { adsApi } from "@/store/reducers/ads/adsApi";
 import type { IAds, IAdsShortInfo } from "@/store/reducers/ads/types";
 import { useEffect, useState } from "react";
+import { AdsListLoading } from "@/common/components/loading/ads/AdsListLoading";
 
 export const AdsList = () => {
   const [data, setData] = useState<IAdsShortInfo[]>();
@@ -21,7 +22,7 @@ export const AdsList = () => {
     fetchData();
   }, []); // Empty dependency array ensures this runs once on mount
 
-  if (loading) return <p>Loading...</p>;
+  if (!loading) return <AdsListLoading />;
 
   return (
     <ul className="grid grid-cols-1 xl:grid-cols-2 gap-4">
