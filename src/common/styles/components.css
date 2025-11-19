@@ -1,0 +1,15 @@
+@layer components {
+  .scrollbar-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    height: 0;
+    width: 0;
+  }
+
+  .transition-sm {
+    transition: all 0.2s ease 0s;
+  }
+}

@@ -1,0 +1,60 @@
+@layer base {
+  html,
+  body {
+    font-family: var(--font-family);
+    color: var(--color-black);
+    background-color: var(--color-white);
+    font-size: var(--text-base);
+    font-weight: 400;
+    font-weight: 1.4;
+
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    overflow-y: scroll;
+  }
+
+  a,
+  button,
+  input,
+  textarea,
+  svg * {
+    user-select: none;
+    transition: all 0.2s ease 0s;
+    
+    &:focus-visible {
+      outline-offset: 2px;
+      outline: 2px solid var(--color-blue-400);
+    }
+  }
+
+  a:hover,
+  button:hover {
+    cursor: pointer;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 700;
+  }
+
+  h1 {
+    font-size: var(--text-2xl);
+  }
+
+  h2 {
+    font-size: var(--text-lg);
+  }
+
+  h3 {
+    font-size: var(--text-base);
+  }
+
+  h4 {
+    font-size: var(--text-sm);
+  }
+}
