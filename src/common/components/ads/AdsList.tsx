@@ -33,12 +33,18 @@ export const AdsList = () => {
   if (loading) return <AdsListLoading />;
 
   return (
-    <ul className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-      {!!data && data?.length !== 0 ? (
-        data.map((item) => <AdsItem key={item.id} ads={item} />)
-      ) : (
-        <>Не найдено</>
-      )}
-    </ul>
+    <>
+      <h2 className="text-xl xs:text-2xl">
+        Найдено объявлений:{" "}
+        <strong className="text-gray-400">{pagination.totalItems}</strong>
+      </h2>
+      <ul className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+        {!!data && data?.length !== 0 ? (
+          data.map((item) => <AdsItem key={item.id} ads={item} />)
+        ) : (
+          <>Не найдено</>
+        )}
+      </ul>
+    </>
   );
 };
