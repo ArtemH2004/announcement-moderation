@@ -9,6 +9,7 @@ import {
   Outlet,
 } from "react-router-dom";
 import { ERoutes } from "@/router/routes";
+import { List } from "@/pages/list/List";
 
 export default function RoutesProvider() {
   const router = createBrowserRouter(
@@ -26,7 +27,7 @@ export default function RoutesProvider() {
           <Route index element={<Navigate to={ERoutes.LIST} replace />} />
 
           <Route element={<PageWrapper />}>
-            <Route path={ERoutes.LIST} element={<>List</>} />
+            <Route path={ERoutes.LIST} element={<List />} />
             <Route path={ERoutes.STATS} element={<>Stats</>} />
             <Route path={`${ERoutes.ITEM}/:id`} element={<>Item</>} />
           </Route>
