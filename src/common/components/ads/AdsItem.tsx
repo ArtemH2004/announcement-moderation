@@ -8,6 +8,7 @@ import {
 } from "@/common/helpers/statusFormatter";
 import SvgHelper from "@/common/components/svg-helper/SvgHelper";
 import { PriorityEnum } from "@/common/enums/PriorityEnum";
+import { AdsImgSwiper } from "@/common/components/ads/AdsImgSwiper";
 
 interface IAdsItemProps {
   ads: IAdsShortInfo;
@@ -21,10 +22,10 @@ export const AdsItem = ({ ads }: IAdsItemProps) => {
   return (
     <li className="w-full flex">
       <article className="rounded-2xl p-4 w-full flex flex-col sm:flex-row gap-4 transition-sm hover:bg-gray-100">
-        <img
-          src={ads.images[0]}
-          alt={ads.title}
-          className="w-full aspect-square sm:size-45 md:size-55 2xl:size-65 rounded-md object-cover object-center"
+        <AdsImgSwiper
+          title={ads.title}
+          images={ads.images}
+          className="w-full aspect-square sm:size-45 md:size-55 2xl:size-65"
         />
         <div className="flex flex-col gap-y-1.5 flex-1 min-w-0">
           <h3 className="w-full font-normal text-lg truncate leading-5">

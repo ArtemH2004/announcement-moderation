@@ -20,9 +20,9 @@ export const AdsList = () => {
       }
     };
     fetchData();
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, []);
 
-  if (!loading) return <AdsListLoading />;
+  if (loading) return <AdsListLoading />;
 
   return (
     <ul className="grid grid-cols-1 xl:grid-cols-2 gap-4">
