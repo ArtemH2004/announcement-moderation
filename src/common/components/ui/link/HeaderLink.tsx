@@ -16,8 +16,10 @@ export const HeaderLink = ({ title, iconName, linkTo }: IHeaderLinkProps) => {
     <li>
       <Link
         to={linkTo}
-        className={`relative flex-center leading-7.5 hover:text-black active:opacity-65 ${
-          isActive ? "text-black" : "text-gray-500"
+        className={`relative flex-center leading-7.5  ${
+          isActive
+            ? "text-blue-400"
+            : "text-black hover:text-red-400 active:opacity-65"
         }`}
       >
         <div className="block md:hidden">
@@ -28,7 +30,7 @@ export const HeaderLink = ({ title, iconName, linkTo }: IHeaderLinkProps) => {
         <div
           className={`hidden md:block absolute bottom-0 left-1/2 -translate-x-1/2 ${
             isActive ? "w-full" : "w-0"
-          } h-0.5 bg-black rounded transition-sm`}
+          } h-0.5 bg-blue-400 rounded transition-sm`}
         />
       </Link>
     </li>

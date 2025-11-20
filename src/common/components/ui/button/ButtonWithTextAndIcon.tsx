@@ -4,7 +4,7 @@ import SvgHelper from "@/common/components/svg-helper/SvgHelper";
 interface IButtonWithTextAndIconProps {
   title: string;
   iconName: ImageComponentsTypes;
-  color?: "red" | "green" | "gray" | "transparent";
+  color?: "blue" | "red" | "green" | "gray" | "transparent";
   type?: "button" | "submit" | "reset";
   onClick?: (e: any) => void;
   iconSecond?: boolean;
@@ -21,6 +21,8 @@ export const ButtonWithTextAndIcon = ({
   const colorClassName =
     color === "red"
       ? "bg-red-200"
+      : color === "blue"
+      ? "bg-blue-400 text-white"
       : color === "green"
       ? "bg-green-200"
       : color === "gray"
@@ -29,13 +31,12 @@ export const ButtonWithTextAndIcon = ({
   return (
     <button
       type={type}
-      title={title}
       onClick={onClick}
       className={`flex-center gap-x-1 ${
         iconSecond ? "flex-row-reverse" : "flex-row"
-      } px-2 py-1 select-none rounded-md ${colorClassName} hover:opacity-85 active:opacity-65`}
+      } px-2 py-1 select-none rounded-lg ${colorClassName} hover:opacity-85 active:opacity-65`}
     >
-      <SvgHelper iconName={iconName} size="20" className="text-black" />
+      <SvgHelper iconName={iconName} size="20" />
       <span className="font-medium text-lg">{title}</span>
     </button>
   );
