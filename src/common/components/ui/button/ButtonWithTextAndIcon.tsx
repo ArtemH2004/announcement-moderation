@@ -34,7 +34,7 @@ export const ButtonWithTextAndIcon = ({
       onClick={onClick}
       className={`flex-center gap-x-1 ${
         iconSecond ? "flex-row-reverse" : "flex-row"
-      } px-2 py-1 select-none rounded-md ${colorClassName} hover:opacity-85 active:opacity-65`}
+      } px-2 py-1 select-none rounded-lg ${colorClassName} hover:opacity-85 active:opacity-65`}
     >
       <SvgHelper iconName={iconName} size="20" />
       <span className="font-medium text-lg">{title}</span>

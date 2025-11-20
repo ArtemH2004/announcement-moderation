@@ -36,7 +36,7 @@ export const AdsItem = ({ ads }: IAdsItemProps) => {
           </span>
           <span className="leading-4.5 truncate">{`${ads.category} • ${time}`}</span>
           <div className="flex items-center gap-x-1.25 mb-0.75">
-            <span className={`rounded-full w-fit px-3 ${statusColor}`}>
+            <span className={`rounded-md w-fit px-2 ${statusColor}`}>
               {status}
             </span>
             {ads.priority === PriorityEnum.URGENT && (
