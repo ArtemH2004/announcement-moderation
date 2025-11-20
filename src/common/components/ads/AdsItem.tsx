@@ -47,7 +47,7 @@ export const AdsItem = ({ ads }: IAdsItemProps) => {
           <ButtonWithTextAndIcon
             title="Открыть"
             iconName="arrow"
-            color="green"
+            color="blue"
             iconSecond
           />
         </div>
