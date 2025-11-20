@@ -29,7 +29,6 @@ export const ButtonWithTextAndIcon = ({
   return (
     <button
       type={type}
-      title={title}
       onClick={onClick}
       className={`flex-center gap-x-1 ${
         iconSecond ? "flex-row-reverse" : "flex-row"
