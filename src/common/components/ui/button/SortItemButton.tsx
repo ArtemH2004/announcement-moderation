@@ -1,4 +1,4 @@
-import { SortEnum } from "@/common/enums/SortEnum";
+import { SortEnum, SortOrderEnum } from "@/common/enums/SortEnum";
 import { sortFormatter } from "@/common/helpers/sortFormatter";
 import { useActions } from "@/store/actions";
 import type { ISort } from "@/store/reducers/sort/sortSlice";
@@ -8,12 +8,12 @@ import { useSearchParams } from "react-router-dom";
 
 interface ISortItemButtonProps {
   sortBy: SortEnum;
-  sortOrder?: "asc" | "desc";
+  sortOrder?: SortOrderEnum;
 }
 
 export const SortItemButton = ({
   sortBy,
-  sortOrder = "desc",
+  sortOrder = SortOrderEnum.DESC,
 }: ISortItemButtonProps) => {
   const { sortBy: currentSortBy, sortOrder: currentSortOrder } = useAppSelector(
     (state) => state.sortReducer

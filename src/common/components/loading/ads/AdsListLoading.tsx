@@ -8,8 +8,8 @@ export const AdsListLoading = () => {
   return (
     <>
       <div className="flex items-center gap-x-2">
-        <h2 className="text-xl xs:text-2xl">Найдено объявлений:</h2>
-        <TextLoading sizeClassName="w-12 h-7" />
+        <h2 className="text-xl xs:text-2xl md:text-3xl">Найдено объявлений:</h2>
+        <TextLoading sizeClassName="w-9 h-4.5 xs:w-11 xs:h-6 md:w-14 md:h-7" />
       </div>
       <SortButton />
       <ul className="grid grid-cols-1 xl:grid-cols-2 gap-4">

@@ -4,3 +4,8 @@ export enum SortEnum {
   PRICE = "price",
   PRIORITY = "priority",
 }
+
+export enum SortOrderEnum {
+  ASC = "asc",
+  DESC = "desc",
+}

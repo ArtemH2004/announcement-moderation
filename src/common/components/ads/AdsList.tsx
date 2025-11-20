@@ -6,23 +6,25 @@ import { AdsListLoading } from "@/common/components/loading/ads/AdsListLoading";
 import { useActions } from "@/store/actions";
 import { useAppSelector } from "@/common/hooks/useAppSelector";
 import { SortButton } from "@/common/components/ui/button/SortButton";
+import { useSearchParams } from "react-router-dom";
+import type { SortEnum, SortOrderEnum } from "@/common/enums/SortEnum";
 
 export const AdsList = () => {
   const pagination = useAppSelector((state) => state.paginationReducer);
-  const { sortBy, sortOrder } = useAppSelector((state) => state.sortReducer);
   const { setPagination } = useActions();
   const [data, setData] = useState<IAdsShortInfo[]>();
   const [loading, setLoading] = useState(true);
-
+  const [searchParams] = useSearchParams();
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // можно еще брать параметры через searchParams, а не из slice
+        // можно еще брать параметры из slice, а не из searchParams
         const response: IAds = await adsApi.getAll(
           pagination.currentPage,
           pagination.itemsPerPage,
-          sortBy,
-          sortOrder
+          searchParams.get("sortBy") as SortEnum ?? undefined,
+          searchParams.get("sortOrder") as SortOrderEnum ?? undefined
         );
         setPagination(response.pagination);
         setData(response.ads);
@@ -33,7 +35,7 @@ export const AdsList = () => {
       }
     };
     fetchData();
-  }, [pagination.currentPage, sortBy, sortOrder]);
+  }, [pagination.currentPage, searchParams]);
 
   if (loading) return <AdsListLoading />;
 

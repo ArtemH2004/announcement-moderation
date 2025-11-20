@@ -1,14 +1,14 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { SortEnum } from "@/common/enums/SortEnum";
+import { SortEnum, SortOrderEnum } from "@/common/enums/SortEnum";
 
 export interface ISort {
   sortBy: SortEnum;
-  sortOrder: "asc" | "desc";
+  sortOrder: SortOrderEnum;
 }
 
 const initialState: ISort = {
   sortBy: SortEnum.DEFAULT,
-  sortOrder: "desc",
+  sortOrder: SortOrderEnum.DESC,
 };
 
 const sortSlice = createSlice({
