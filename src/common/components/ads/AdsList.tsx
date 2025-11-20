@@ -34,7 +34,7 @@ export const AdsList = () => {
 
   return (
     <>
-      <h2 className="text-xl xs:text-2xl">
+      <h2 className="text-xl xs:text-2xl mx-4">
         Найдено объявлений:{" "}
         <strong className="text-gray-400">{pagination.totalItems}</strong>
       </h2>

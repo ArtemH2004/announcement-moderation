@@ -14,12 +14,12 @@ export const AdsImgSwiper = ({
   const [currentImage, setCurrentImage] = useState(images[0]);
 
   return (
-    <div className={`flex flex-col rounded-md ${className}`}>
+    <div className={`flex flex-col rounded-xl ${className}`}>
       <div className="relative w-full">
         <img
           src={currentImage}
           alt={title}
-          className={`object-cover object-center rounded-md ${className}`}
+          className={`object-cover object-center rounded-xl ${className}`}
         />
 
         <ul className="absolute inset-0 flex">
