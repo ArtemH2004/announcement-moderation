@@ -1,11 +1,13 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { rememberEnhancer, rememberReducer } from "redux-remember";
 import { paginationReducer } from "@/store/reducers/pagination/paginationSlice";
+import { sortReducer } from "@/store/reducers/sort/sortSlice";
 
-const rememberedReducers = ["paginationReducer"];
+const rememberedReducers = ["paginationReducer", "sortReducer"];
 
 const rootReducer = combineReducers({
   paginationReducer,
+  sortReducer,
 });
 
 const rememberedReducer = rememberReducer(rootReducer);
