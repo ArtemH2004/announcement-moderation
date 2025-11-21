@@ -100,7 +100,7 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
         <AdsImgSwiper
           title={ads.title}
           images={ads.images}
-          className="mx-auto w-full aspect-square sm:size-75 md:size-85 2xl:size-100"
+          className="mx-auto lg:ml-0 w-full aspect-square sm:size-75 md:size-85 2xl:size-100"
         />
 
         {ads.moderationHistory.length !== 0 && (

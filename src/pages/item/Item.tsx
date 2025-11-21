@@ -1,4 +1,5 @@
 import { AdsContent } from "@/common/components/ads/AdsContent";
+import { AdsContentLoading } from "@/common/components/loading/ads/AdsContentLoading";
 import { adsApi } from "@/store/reducers/ads/adsApi";
 import type { IAdsFullInfo } from "@/store/reducers/ads/types";
 import { useEffect, useState } from "react";
@@ -23,7 +24,7 @@ export const Item = () => {
     fetchData();
   }, [id]);
 
-  if (loading) return <>loading</>;
+  if (loading) return <AdsContentLoading />;
   if (!data) return <>Объявление не найдено</>;
 
   return <AdsContent ads={data} />;
