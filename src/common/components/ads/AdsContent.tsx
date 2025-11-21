@@ -17,12 +17,16 @@ import useClickOutRef from "@/common/hooks/useClickOutRef";
 import Dropdown from "@/common/components/dropdown/Dropdown";
 import { ActionDropdown } from "@/common/components/dropdown/ActionDropdown";
 import { ActionEnum } from "@/common/enums/ActionEnum";
+import { NavigationLink } from "@/common/components/ui/link/NavigationLink";
+import { ERoutes } from "@/router/routes";
+import { useAppSelector } from "@/common/hooks/useAppSelector";
 
 interface IAdsContentProps {
   ads: IAdsFullInfo;
 }
 
 export const AdsContent = ({ ads }: IAdsContentProps) => {
+  const maxId = useAppSelector((state) => state.paginationReducer.totalItems);
   const [isRejectDropdownOpen, setRejectDropdownOpen] = useState(false);
   const [isEditDropdownOpen, setEditDropdownOpen] = useState(false);
   const [action, setAction] = useState<ActionEnum>(ActionEnum.OTHER);
@@ -33,14 +37,13 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
   const time = timeFormatter(ads.createdAt);
 
   const handleBackClick = () => {
-    navigate(-1);
+    navigate(ERoutes.LIST);
   };
 
   const handleApproveClick = async () => {
     try {
       await adsApi.approve(ads.id);
-      // переделать переход на следующее объявление
-      handleBackClick();
+      ads.id !== maxId && navigate(`${ERoutes.ITEM}/${ads.id + 1}`);
     } catch {}
   };
 
@@ -52,8 +55,9 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
     try {
       await adsApi.reject(ads.id, request);
       handleRejectClose();
-      // переделать переход на следующее объявление
-      handleBackClick();
+      ads.id !== maxId
+        ? navigate(`${ERoutes.ITEM}/${ads.id + 1}`)
+        : console.log("ou");
     } catch {}
   };
 
@@ -65,8 +69,7 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
     try {
       await adsApi.requestChanges(ads.id, request);
       handleEditClose();
-      // переделать переход на следующее объявление
-      handleBackClick();
+      ads.id !== maxId && navigate(`${ERoutes.ITEM}/${ads.id + 1}`);
     } catch {}
   };
 
@@ -165,6 +168,12 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
           </Dropdown>
         </div>
       </div>
+
+      <nav className="flex-center gap-x-4">
+        <NavigationLink type="prev" />
+        <span className="text-gray-500">|</span>
+        <NavigationLink type="next" />
+      </nav>
     </section>
   );
 };

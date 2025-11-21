@@ -24,7 +24,7 @@ export const statusColorFormatter = (status: StatusEnum): string => {
     case StatusEnum.REJECTED:
       return "bg-red-100 text-red-800";
     case StatusEnum.PENDING:
-      return "bg-yellow-400";
+      return "bg-orange-100 text-orange-600";
     case StatusEnum.DRAFT:
       return "bg-gray-100 text-gray-800";
     case StatusEnum.REQUEST_CHANGES:

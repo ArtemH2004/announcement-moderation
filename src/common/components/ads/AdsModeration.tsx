@@ -1,15 +1,19 @@
 import type { IAdsModerationHistory } from "@/store/reducers/ads/types";
 import { AdsModerationItem } from "@/common/components/ads/AdsModerationItem";
 import { PaginationButton } from "@/common/components/ui/button/PaginationButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IAdsModerationProps {
   moderation: IAdsModerationHistory[];
 }
 
 export const AdsModeration = ({ moderation }: IAdsModerationProps) => {
-  const [currentPage, setCurrentPage] = useState(moderation.length);
+  const [currentPage, setCurrentPage] = useState(1);
   const totalPages = moderation.length;
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [moderation]);
 
   const nextPage = () => {
     if (currentPage < totalPages) {
