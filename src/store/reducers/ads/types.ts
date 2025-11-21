@@ -25,14 +25,22 @@ export interface IAdsCharacteristics {
   [key: string]: string;
 }
 
-export interface IAdsModerationHistory {}
+export interface IAdsModerationHistory {
+  id: number;
+  moderatorId: number;
+  moderatorName: string;
+  action: StatusEnum;
+  reason?: string;
+  comment: string;
+  timestamp: string;
+}
 
 export interface IAdsFullInfo extends IAdsShortInfo {
   description: string;
   categoryId: number;
   seller: IAdsSeller;
   characteristics: IAdsCharacteristics;
-  moderationHistory: IAdsModerationHistory;
+  moderationHistory: IAdsModerationHistory[];
 }
 
 export interface IAds {
