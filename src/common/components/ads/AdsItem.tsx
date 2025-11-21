@@ -9,6 +9,8 @@ import {
 import SvgHelper from "@/common/components/svg-helper/SvgHelper";
 import { PriorityEnum } from "@/common/enums/PriorityEnum";
 import { AdsImgSwiper } from "@/common/components/ads/AdsImgSwiper";
+import { useNavigate } from "react-router-dom";
+import { ERoutes } from "@/router/routes";
 
 interface IAdsItemProps {
   ads: IAdsShortInfo;
@@ -19,6 +21,12 @@ export const AdsItem = ({ ads }: IAdsItemProps) => {
   const time = timeFormatter(ads.createdAt);
   const status = statusFormatter(ads.status);
   const statusColor = statusColorFormatter(ads.status);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`${ERoutes.ITEM}/${ads.id}`)
+  }
+
   return (
     <li className="w-full flex">
       <article className="rounded-2xl p-4 w-full flex flex-col sm:flex-row gap-4 transition-sm hover:bg-gray-100">
@@ -49,6 +57,7 @@ export const AdsItem = ({ ads }: IAdsItemProps) => {
             iconName="arrow"
             color="blue"
             iconSecond
+            onClick={handleClick}
           />
         </div>
       </article>

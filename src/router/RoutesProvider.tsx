@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import { ERoutes } from "@/router/routes";
 import { List } from "@/pages/list/List";
+import { Item } from "@/pages/item/Item";
 
 export default function RoutesProvider() {
   const router = createBrowserRouter(
@@ -29,7 +30,7 @@ export default function RoutesProvider() {
           <Route element={<PageWrapper />}>
             <Route path={ERoutes.LIST} element={<List />} />
             <Route path={ERoutes.STATS} element={<>Stats</>} />
-            <Route path={`${ERoutes.ITEM}/:id`} element={<>Item</>} />
+            <Route path={`${ERoutes.ITEM}/:id`} element={<Item />} />
           </Route>
 
           <Route path="*" element={<>Error404</>} />
