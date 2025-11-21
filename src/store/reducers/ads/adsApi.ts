@@ -30,6 +30,15 @@ export const adsApi = {
     }
   },
 
+  async getById(id: string) {
+    try {
+      const response = await api.get(`${AdsServiceEndpoints.ALL}/${id}`);
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) throw new Error("Объявление не найдено");
+    }
+  },
+
   async getFilters(limit: number) {
     const limitParam = checkParam("limit", limit);
 
