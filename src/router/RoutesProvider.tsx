@@ -11,6 +11,7 @@ import {
 import { ERoutes } from "@/router/routes";
 import { List } from "@/pages/list/List";
 import { Item } from "@/pages/item/Item";
+import { Empty } from "@/common/components/Empty";
 
 export default function RoutesProvider() {
   const router = createBrowserRouter(
@@ -31,9 +32,8 @@ export default function RoutesProvider() {
             <Route path={ERoutes.LIST} element={<List />} />
             <Route path={ERoutes.STATS} element={<>Stats</>} />
             <Route path={`${ERoutes.ITEM}/:id`} element={<Item />} />
+            <Route path="*" element={<Empty />} />
           </Route>
-
-          <Route path="*" element={<>Error404</>} />
         </Route>
       </>
     )

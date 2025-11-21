@@ -4,6 +4,7 @@ import { adsApi } from "@/store/reducers/ads/adsApi";
 import type { IAdsFullInfo } from "@/store/reducers/ads/types";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Empty } from "@/common/components/Empty";
 
 export const Item = () => {
   const [data, setData] = useState<IAdsFullInfo>();
@@ -25,7 +26,7 @@ export const Item = () => {
   }, [id]);
 
   if (loading) return <AdsContentLoading />;
-  if (!data) return <>Объявление не найдено</>;
+  if (!data) return <Empty />;
 
   return <AdsContent ads={data} />;
 };
