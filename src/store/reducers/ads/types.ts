@@ -1,3 +1,4 @@
+import type { ActionEnum } from "@/common/enums/ActionEnum";
 import type { PriorityEnum } from "@/common/enums/PriorityEnum";
 import type { StatusEnum } from "@/common/enums/StatusEnum";
 import type { IPagination } from "@/store/reducers/pagination/types";
@@ -46,4 +47,9 @@ export interface IAdsFullInfo extends IAdsShortInfo {
 export interface IAds {
   ads: IAdsFullInfo[];
   pagination: IPagination;
+}
+
+export interface IAdsAction {
+  reason: ActionEnum;
+  comment?: string;
 }

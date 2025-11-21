@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import type { IAdsFullInfo } from "@/store/reducers/ads/types";
+import type { IAdsAction, IAdsFullInfo } from "@/store/reducers/ads/types";
 import { AdsImgSwiper } from "@/common/components/ads/AdsImgSwiper";
 import { ButtonWithIcon } from "@/common/components/ui/button/ButtonWithIcon";
 import { priceFormatter } from "@/common/helpers/priceFormatter";
@@ -12,12 +12,22 @@ import { PriorityEnum } from "@/common/enums/PriorityEnum";
 import SvgHelper from "@/common/components/svg-helper/SvgHelper";
 import { ButtonWithTextAndIcon } from "@/common/components/ui/button/ButtonWithTextAndIcon";
 import { adsApi } from "@/store/reducers/ads/adsApi";
+import { useState } from "react";
+import useClickOutRef from "@/common/hooks/useClickOutRef";
+import Dropdown from "@/common/components/dropdown/Dropdown";
+import { ActionDropdown } from "@/common/components/dropdown/ActionDropdown";
+import { ActionEnum } from "@/common/enums/ActionEnum";
 
 interface IAdsContentProps {
   ads: IAdsFullInfo;
 }
 
 export const AdsContent = ({ ads }: IAdsContentProps) => {
+  const [isRejectDropdownOpen, setRejectDropdownOpen] = useState(false);
+  const [isEditDropdownOpen, setEditDropdownOpen] = useState(false);
+  const [action, setAction] = useState<ActionEnum>(ActionEnum.OTHER);
+  const [comment, setComment] = useState("");
+
   const navigate = useNavigate();
   const price = priceFormatter(ads.price);
   const time = timeFormatter(ads.createdAt);
@@ -33,6 +43,30 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
       handleBackClick();
     } catch {}
   };
+
+  const handleRejectClick = async () => {
+    const request: IAdsAction = {
+      reason: action,
+      comment: comment,
+    };
+    try {
+      await adsApi.reject(ads.id, request);
+      handleRejectClose();
+      // переделать переход на следующее объявление
+      handleBackClick();
+    } catch {}
+  };
+
+  const handleRejectClose = () => {
+    isRejectDropdownOpen && setRejectDropdownOpen(false);
+  };
+
+  const handleEditClose = () => {
+    isEditDropdownOpen && setEditDropdownOpen(false);
+  };
+
+  const rejectRef = useClickOutRef<HTMLDivElement>(handleRejectClose);
+  const editRef = useClickOutRef<HTMLDivElement>(handleEditClose);
 
   return (
     <section className="w-full flex flex-col gap-y-4">
@@ -81,7 +115,24 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
           color="green"
           onClick={handleApproveClick}
         />
-        <ButtonWithTextAndIcon iconName="close" title="Отклонить" color="red" />
+        <div className="relative w-fit" ref={rejectRef}>
+          <ButtonWithTextAndIcon
+            iconName="close"
+            title="Отклонить"
+            color="red"
+            onClick={() => setRejectDropdownOpen(!isRejectDropdownOpen)}
+          />
+
+          <Dropdown isOpen={isRejectDropdownOpen} position="top">
+            <ActionDropdown
+              action={action}
+              setAction={setAction}
+              comment={comment}
+              setComment={setComment}
+              onClick={handleRejectClick}
+            />
+          </Dropdown>
+        </div>
         <ButtonWithTextAndIcon
           iconName="reload"
           title="Доработка"
