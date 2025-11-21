@@ -15,7 +15,7 @@ export const AdsList = () => {
   const [data, setData] = useState<IAdsShortInfo[]>();
   const [loading, setLoading] = useState(true);
   const [searchParams] = useSearchParams();
- 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,8 +23,9 @@ export const AdsList = () => {
         const response: IAds = await adsApi.getAll(
           pagination.currentPage,
           pagination.itemsPerPage,
-          searchParams.get("sortBy") as SortEnum ?? undefined,
-          searchParams.get("sortOrder") as SortOrderEnum ?? undefined
+          (searchParams.get("search") as string) ?? undefined,
+          (searchParams.get("sortBy") as SortEnum) ?? undefined,
+          (searchParams.get("sortOrder") as SortOrderEnum) ?? undefined
         );
         setPagination(response.pagination);
         setData(response.ads);
