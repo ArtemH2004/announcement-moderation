@@ -15,7 +15,9 @@ export interface IAdsShortInfo {
 
 export interface IAdsSeller {}
 
-export interface IAdsCharacteristics {}
+export interface IAdsCharacteristics {
+  [key: string]: string;
+}
 
 export interface IAdsModerationHistory {}
 
