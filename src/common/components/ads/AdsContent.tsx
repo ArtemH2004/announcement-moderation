@@ -10,6 +10,7 @@ import {
 import { PriorityEnum } from "@/common/enums/PriorityEnum";
 import SvgHelper from "../svg-helper/SvgHelper";
 import { AdsCharacteristics } from "./AdsCharacteristics";
+import { AdsDescription } from "./AdsDescription";
 
 interface IAdsContentProps {
   ads: IAdsFullInfo;
@@ -21,7 +22,7 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
   const status = statusFormatter(ads.status);
   const statusColor = statusColorFormatter(ads.status);
 
-  console.log(ads)
+  console.log(ads);
 
   return (
     <section className="w-full flex flex-col gap-y-4">
@@ -38,16 +39,15 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
         />
       </div>
 
+      <div className="flex flex-col gap-y-2">
+        <span className="font-bold text-xl leading-4.5 truncate">{price}</span>
+        <span className="leading-4.5 truncate">{`${ads.category} • ${time}`}</span>
+      </div>
+
       <AdsCharacteristics characteristics={ads.characteristics} />
 
-      <span className="font-bold text-xl leading-4.5 truncate">{price}</span>
-      <span className="leading-4.5 truncate">{`${ads.category} • ${time}`}</span>
-      <div className="flex items-center gap-x-1.25 mb-0.75">
-        <span className={`rounded-md w-fit px-2 ${statusColor}`}>{status}</span>
-        {ads.priority === PriorityEnum.URGENT && (
-          <SvgHelper iconName="fire" className="text-red-700" />
-        )}
-      </div>
+      <AdsDescription description={ads.description} />
+
     </section>
   );
 };
