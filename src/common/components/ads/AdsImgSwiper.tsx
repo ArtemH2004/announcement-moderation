@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface IAdsImgSwiperProps {
   title: string;
@@ -12,6 +12,10 @@ export const AdsImgSwiper = ({
   className = "",
 }: IAdsImgSwiperProps) => {
   const [currentImage, setCurrentImage] = useState(images[0]);
+
+  useEffect(() => {
+    setCurrentImage(images[0]);
+  }, [images]);
 
   return (
     <div className={`flex flex-col rounded-xl ${className}`}>

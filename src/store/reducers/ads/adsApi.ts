@@ -3,6 +3,7 @@ import { AdsServiceEndpoints } from "@/api/api.ts";
 import { api } from "@/api/api.ts";
 import type { SortEnum } from "@/common/enums/SortEnum";
 import { checkParam } from "@/common/helpers/checkParam";
+import type { IAdsAction } from "@/store/reducers/ads/types";
 
 export const adsApi = {
   async getAll(
@@ -27,6 +28,50 @@ export const adsApi = {
       return response.data;
     } catch (error) {
       if (axios.isAxiosError(error)) throw new Error("Объявления не найдены");
+    }
+  },
+
+  async getById(id: string) {
+    try {
+      const response = await api.get(`${AdsServiceEndpoints.ALL}/${id}`);
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) throw new Error("Объявление не найдено");
+    }
+  },
+
+  async approve(id: number) {
+    try {
+      const response = await api.post(
+        `${AdsServiceEndpoints.ALL}/${id}/approve`
+      );
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) throw new Error("Объявление не одобрено");
+    }
+  },
+
+  async reject(id: number, request: IAdsAction) {
+    try {
+      const response = await api.post(
+        `${AdsServiceEndpoints.ALL}/${id}/reject`,
+        request
+      );
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) throw new Error("Объявление не отклонено");
+    }
+  },
+
+  async requestChanges(id: number, request: IAdsAction) {
+    try {
+      const response = await api.post(
+        `${AdsServiceEndpoints.ALL}/${id}/request-changes`,
+        request
+      );
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) throw new Error("Объявление не доработано");
     }
   },
 
