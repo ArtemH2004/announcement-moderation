@@ -89,18 +89,18 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
           iconName="arrow_back"
           onClick={handleBackClick}
         />
-        <h2 className="text-xl xs:text-2xl md:text-3xl">{ads.title}</h2>
+        <h2 className=":text-xl lg:text-2xl xl:text-3xl">{ads.title}</h2>
 
         {ads.priority === PriorityEnum.URGENT && (
           <SvgHelper iconName="fire" className="text-red-700" />
         )}
       </div>
 
-      <div className="flex items-start justify-between gap-x-4 w-full">
+      <div className="flex flex-col-reverse lg:flex-row items-start justify-between gap-4 w-full">
         <AdsImgSwiper
           title={ads.title}
           images={ads.images}
-          className="w-full aspect-square sm:size-55 md:size-75 2xl:size-100"
+          className="mx-auto w-full aspect-square sm:size-75 md:size-85 2xl:size-100"
         />
 
         {ads.moderationHistory.length !== 0 && (
@@ -121,7 +121,7 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
 
       <AdsSeller seller={ads.seller} />
 
-      <div className="flex-center gap-x-4">
+      <div className="w-full flex-center flex-col md:flex-row gap-4">
         <ButtonWithTextAndIcon
           iconName="check_mark"
           title="Одобрить"
