@@ -57,6 +57,19 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
     } catch {}
   };
 
+  const handleEditClick = async () => {
+    const request: IAdsAction = {
+      reason: action,
+      comment: comment,
+    };
+    try {
+      await adsApi.requestChanges(ads.id, request);
+      handleEditClose();
+      // переделать переход на следующее объявление
+      handleBackClick();
+    } catch {}
+  };
+
   const handleRejectClose = () => {
     isRejectDropdownOpen && setRejectDropdownOpen(false);
   };
@@ -133,11 +146,24 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
             />
           </Dropdown>
         </div>
-        <ButtonWithTextAndIcon
-          iconName="reload"
-          title="Доработка"
-          color="yellow"
-        />
+        <div className="relative w-fit" ref={editRef}>
+          <ButtonWithTextAndIcon
+            iconName="reload"
+            title="Доработка"
+            color="yellow"
+            onClick={() => setEditDropdownOpen(!isEditDropdownOpen)}
+          />
+
+          <Dropdown isOpen={isEditDropdownOpen} position="top">
+            <ActionDropdown
+              action={action}
+              setAction={setAction}
+              comment={comment}
+              setComment={setComment}
+              onClick={handleEditClick}
+            />
+          </Dropdown>
+        </div>
       </div>
     </section>
   );

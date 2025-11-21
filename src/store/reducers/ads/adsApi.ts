@@ -63,6 +63,18 @@ export const adsApi = {
     }
   },
 
+  async requestChanges(id: number, request: IAdsAction) {
+    try {
+      const response = await api.post(
+        `${AdsServiceEndpoints.ALL}/${id}/request-changes`,
+        request
+      );
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) throw new Error("Объявление не доработано");
+    }
+  },
+
   async getFilters(limit: number) {
     const limitParam = checkParam("limit", limit);
 
