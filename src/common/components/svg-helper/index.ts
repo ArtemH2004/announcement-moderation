@@ -8,6 +8,8 @@ import fire from "@/common/components/svg-helper/icons/fire.svg?react";
 import filters from "@/common/components/svg-helper/icons/filters.svg?react";
 import sort from "@/common/components/svg-helper/icons/sort.svg?react";
 import check_mark from "@/common/components/svg-helper/icons/check-mark.svg?react";
+import close from "@/common/components/svg-helper/icons/close.svg?react";
+import reload from "@/common/components/svg-helper/icons/reload.svg?react";
 
 export type IconType = React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & {
@@ -26,6 +28,8 @@ export type ImageComponentsTypes =
  | 'filters'
  | 'sort'
  | 'check_mark'
+ | 'close'
+ | 'reload'
 ;
 
 export const ImageComponents: Record<ImageComponentsTypes, IconType> = {
@@ -39,4 +43,6 @@ export const ImageComponents: Record<ImageComponentsTypes, IconType> = {
     filters,
     sort,
     check_mark,
+    close,
+    reload,
 };

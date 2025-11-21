@@ -10,6 +10,8 @@ import { AdsSeller } from "@/common/components/ads/AdsSeller";
 import { AdsModeration } from "@/common/components/ads/AdsModeration";
 import { PriorityEnum } from "@/common/enums/PriorityEnum";
 import SvgHelper from "@/common/components/svg-helper/SvgHelper";
+import { ButtonWithTextAndIcon } from "@/common/components/ui/button/ButtonWithTextAndIcon";
+import { adsApi } from "@/store/reducers/ads/adsApi";
 
 interface IAdsContentProps {
   ads: IAdsFullInfo;
@@ -22,6 +24,14 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
 
   const handleBackClick = () => {
     navigate(-1);
+  };
+
+  const handleApproveClick = async () => {
+    try {
+      await adsApi.approve(ads.id);
+      // переделать переход на следующее объявление
+      handleBackClick();
+    } catch {}
   };
 
   return (
@@ -46,7 +56,9 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
           className="w-full aspect-square sm:size-55 md:size-75 2xl:size-100"
         />
 
-        {ads.moderationHistory.length !== 0 && <AdsModeration moderation={ads.moderationHistory} />}
+        {ads.moderationHistory.length !== 0 && (
+          <AdsModeration moderation={ads.moderationHistory} />
+        )}
       </div>
 
       <div className="flex flex-col gap-y-2 mt-1">
@@ -61,6 +73,21 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
       </AdsWrapper>
 
       <AdsSeller seller={ads.seller} />
+
+      <div className="flex-center gap-x-4">
+        <ButtonWithTextAndIcon
+          iconName="check_mark"
+          title="Одобрить"
+          color="green"
+          onClick={handleApproveClick}
+        />
+        <ButtonWithTextAndIcon iconName="close" title="Отклонить" color="red" />
+        <ButtonWithTextAndIcon
+          iconName="reload"
+          title="Доработка"
+          color="yellow"
+        />
+      </div>
     </section>
   );
 };

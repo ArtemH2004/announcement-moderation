@@ -9,7 +9,7 @@ interface IAdsModerationProps {
 
 export const AdsModeration = ({ moderation }: IAdsModerationProps) => {
   const [currentPage, setCurrentPage] = useState(moderation.length);
-  const totalPages = currentPage;
+  const totalPages = moderation.length;
 
   const nextPage = () => {
     if (currentPage < totalPages) {
@@ -40,12 +40,10 @@ export const AdsModeration = ({ moderation }: IAdsModerationProps) => {
       <h3 className="text-xl">История модерации</h3>
 
       <ul className="flex flex-col gap-y-0.5">
-        {moderation.map((item) => (
-          <AdsModerationItem key={item.id} moderation={item} />
-        ))}
+        <AdsModerationItem moderation={moderation[currentPage - 1]} />
       </ul>
 
-      {totalPages > 1 && (
+      {totalPages > 0 && (
         <ul className="w-full pt-2 flex-center gap-x-2">
           <PaginationButton
             title="Предыдущая страница"

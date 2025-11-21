@@ -39,6 +39,17 @@ export const adsApi = {
     }
   },
 
+  async approve(id: number) {
+    try {
+      const response = await api.post(
+        `${AdsServiceEndpoints.ALL}/${id}/approve`
+      );
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) throw new Error("Объявление не одобрено");
+    }
+  },
+
   async getFilters(limit: number) {
     const limitParam = checkParam("limit", limit);
 
