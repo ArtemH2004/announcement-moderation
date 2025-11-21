@@ -13,9 +13,21 @@ export interface IAdsShortInfo {
   priority: PriorityEnum;
 }
 
+export interface IAdsSeller {}
 
+export interface IAdsCharacteristics {}
+
+export interface IAdsModerationHistory {}
+
+export interface IAdsFullInfo extends IAdsShortInfo {
+  description: string;
+  categoryId: number;
+  seller: IAdsSeller;
+  characteristics: IAdsCharacteristics;
+  moderationHistory: IAdsModerationHistory;
+}
 
 export interface IAds {
-  ads: IAdsShortInfo[];
+  ads: IAdsFullInfo[];
   pagination: IPagination;
 }
