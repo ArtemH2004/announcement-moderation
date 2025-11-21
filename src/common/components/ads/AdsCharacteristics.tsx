@@ -1,4 +1,5 @@
 import type { IAdsCharacteristics } from "@/store/reducers/ads/types";
+import { AdsWrapper } from "@/common/components/wrapper/AdsWrapper";
 
 interface IAdsCharacteristicsProps {
   characteristics: IAdsCharacteristics;
@@ -8,8 +9,7 @@ export const AdsCharacteristics = ({
   characteristics,
 }: IAdsCharacteristicsProps) => {
   return (
-    <div className="w-full flex flex-col gap-y-2">
-      <h3 className="text-2xl">Характеристики</h3>
+    <AdsWrapper title="Характеристики">
       <table className="w-fit">
         <tbody>
           {Object.entries(characteristics).map(([key, value]) => (
@@ -22,6 +22,6 @@ export const AdsCharacteristics = ({
           ))}
         </tbody>
       </table>
-    </div>
+    </AdsWrapper>
   );
 };

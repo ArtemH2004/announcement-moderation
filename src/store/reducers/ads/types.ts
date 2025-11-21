@@ -13,7 +13,13 @@ export interface IAdsShortInfo {
   priority: PriorityEnum;
 }
 
-export interface IAdsSeller {}
+export interface IAdsSeller {
+  id: number;
+  name: string;
+  rating: string;
+  totalAds: number;
+  registeredAt: string;
+}
 
 export interface IAdsCharacteristics {
   [key: string]: string;
