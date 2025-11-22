@@ -27,7 +27,7 @@ export const StatsToggle = () => {
 
   return (
     <nav className="w-fit flex mx-auto">
-      <ul className="p-1 flex-center rounded-2xl bg-blue-100">
+      <ul className="p-1 flex-center gap-x-1 rounded-2xl bg-blue-100">
         {statsData.map((item, index) => (
           <StatsToggleButton
             key={index}

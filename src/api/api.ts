@@ -16,4 +16,5 @@ export enum AdsServiceEndpoints {
 
 export enum StatsServiceEndpoints {
   SUMMARY = `${statsService}/summary`,
+  DECISIONS = `${statsService}/chart/decisions`,
 }

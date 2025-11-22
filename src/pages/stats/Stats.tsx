@@ -24,7 +24,7 @@ export const Stats = () => {
       ) : section === StatsEnum.DECISIONS ? (
         <StatsCircleDiagram />
       ) : (
-        <></>
+        <>Category</>
       )}
     </>
   );

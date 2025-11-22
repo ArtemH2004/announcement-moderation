@@ -16,4 +16,18 @@ export const statsApi = {
       if (axios.isAxiosError(error)) throw new Error("Статистика не найдена");
     }
   },
+
+  async getDecisions(period?: PeriodEnum) {
+    const periodParam = checkParam("period", period);
+
+    try {
+      const response = await api.get(
+        `${StatsServiceEndpoints.DECISIONS}?${periodParam}`
+      );
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error))
+        throw new Error("График решений не найден");
+    }
+  },
 };

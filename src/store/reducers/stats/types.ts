@@ -1,17 +1,19 @@
 import type { PeriodEnum } from "@/common/enums/PeriodEnum";
 
-export interface IStatsPercentage {
-  approvedPercentage: number;
-  rejectedPercentage: number;
-  requestChangesPercentage: number;
+export interface IStatsDecisions {
+  approved: number;
+  rejected: number;
+  requestChanges: number;
 }
 
-export interface IStatsSummary extends IStatsPercentage {
+export interface IStatsSummary {
   totalReviewed: number;
   totalReviewedToday: number;
   totalReviewedThisWeek: number;
   totalReviewedThisMonth: number;
-
+  approvedPercentage: number;
+  rejectedPercentage: number;
+  requestChangesPercentage: number;
   averageReviewTime: number;
 }
 

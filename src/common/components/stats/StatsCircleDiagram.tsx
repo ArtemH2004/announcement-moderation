@@ -1,34 +1,54 @@
 import { periodFormatter } from "@/common/helpers/periodFormatter";
 import { useAppSelector } from "@/common/hooks/useAppSelector";
-import type { IStatsPercentage } from "@/store/reducers/stats/types";
+import type { IStatsDecisions } from "@/store/reducers/stats/types";
 import { StatsDiagramItem } from "@/common/components/stats/StatsDiagramItem";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { statsApi } from "@/store/reducers/stats/statsApi";
+import type { PeriodEnum } from "@/common/enums/PeriodEnum";
+import { Empty } from "@/common/components/Empty";
 
-interface IStatsCircleDiagramProps {
-  percentage: IStatsPercentage;
-}
-
-export const StatsCircleDiagram = ({
-  percentage = null,
-}: IStatsCircleDiagramProps) => {
+export const StatsCircleDiagram = () => {
   const period = useAppSelector((state) => state.statsReducer.period);
   const formatPeriod = periodFormatter(period);
+  const [data, setData] = useState<IStatsDecisions>();
+  const [loading, setLoading] = useState(true);
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await statsApi.getDecisions(
+          (searchParams.get("period") as PeriodEnum) ?? undefined
+        );
+        setData(response);
+      } catch {
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [searchParams]);
+
+  if (loading) return <>loading</>;
+  if (!data) return <Empty />;
 
   const diagramData = [
     {
       title: "Одобрено",
-      value: percentage.approvedPercentage,
+      value: data.approved,
       color: "#05df72",
       bgColor: "bg-green-400",
     },
     {
       title: "Отклонено",
-      value: percentage.rejectedPercentage,
+      value: data.rejected,
       color: "#ff6467",
       bgColor: "bg-red-400",
     },
     {
       title: "На доработке",
-      value: percentage.requestChangesPercentage,
+      value: data.requestChanges,
       color: "#fdc700",
       bgColor: "bg-yellow-400",
     },
@@ -65,7 +85,7 @@ export const StatsCircleDiagram = ({
       <h3 className="text-lg">
         Диаграмма решений
         {formatPeriod !== "По умолчанию" && (
-          <strong className="text-gray-500">{` (${formatPeriod})`}</strong>
+          <strong className="text-gray-500">{` (${formatPeriod.toLowerCase()})`}</strong>
         )}
       </h3>
 
