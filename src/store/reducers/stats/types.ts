@@ -24,3 +24,7 @@ export interface IStatsDecisions {
 export interface IStatsActivity extends IStatsDecisions {
   date: string;
 }
+
+export interface IStatsCategories {
+  [key: string]: number;
+}

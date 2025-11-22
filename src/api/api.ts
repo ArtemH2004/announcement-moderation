@@ -18,4 +18,5 @@ export enum StatsServiceEndpoints {
   SUMMARY = `${statsService}/summary`,
   ACTIVITY = `${statsService}/chart/activity`,
   DECISIONS = `${statsService}/chart/decisions`,
+  CATEGORIES = `${statsService}/chart/categories`,
 }

@@ -1,4 +1,5 @@
 import { StatsActivity } from "@/common/components/stats/StatsActivity";
+import { StatsCategoriesList } from "@/common/components/stats/StatsCategoriesList";
 import { StatsCircleDiagram } from "@/common/components/stats/StatsCircleDiagram";
 import { StatsList } from "@/common/components/stats/StatsList";
 import { PeriodButton } from "@/common/components/ui/button/PeriodButton";
@@ -18,14 +19,14 @@ export const Stats = () => {
         <PeriodButton />
       </div>
       <StatsToggle />
-      {section === StatsEnum.SUMMARY ? (
+      {section === StatsEnum.SUMMARY || section === null ? (
         <StatsList />
       ) : section === StatsEnum.ACTIVITY ? (
         <StatsActivity />
       ) : section === StatsEnum.DECISIONS ? (
         <StatsCircleDiagram />
       ) : (
-        <>Category</>
+        section === StatsEnum.CATEGORIES && <StatsCategoriesList />
       )}
     </>
   );

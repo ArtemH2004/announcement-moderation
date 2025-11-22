@@ -44,4 +44,18 @@ export const statsApi = {
         throw new Error("График активности не найден");
     }
   },
+
+  async getCategories(period?: PeriodEnum) {
+    const periodParam = checkParam("period", period);
+
+    try {
+      const response = await api.get(
+        `${StatsServiceEndpoints.CATEGORIES}?${periodParam}`
+      );
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error))
+        throw new Error("График по категориям не найден");
+    }
+  },
 };
