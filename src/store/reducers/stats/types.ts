@@ -1,11 +1,5 @@
 import type { PeriodEnum } from "@/common/enums/PeriodEnum";
 
-export interface IStatsDecisions {
-  approved: number;
-  rejected: number;
-  requestChanges: number;
-}
-
 export interface IStatsSummary {
   totalReviewed: number;
   totalReviewedToday: number;
@@ -19,4 +13,14 @@ export interface IStatsSummary {
 
 export interface IStatsPeriod {
   period: PeriodEnum;
+}
+
+export interface IStatsDecisions {
+  approved: number;
+  rejected: number;
+  requestChanges: number;
+}
+
+export interface IStatsActivity extends IStatsDecisions {
+  date: string;
 }

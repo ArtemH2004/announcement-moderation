@@ -1,6 +1,6 @@
 interface IStatsDiagramItemProps {
   title: string;
-  value: number;
+  value?: number;
   color: string;
 }
 
@@ -13,9 +13,9 @@ export const StatsDiagramItem = ({
     <li className="flex items-center justify-between gap-x-2 w-full">
       <div className="flex-center gap-x-2">
         <div className={`size-4 rounded-sm ${color}`} />
-        <span className="">{title}</span>
+        <span className="text-nowrap">{title}</span>
       </div>
-      <span className="">{`${value.toFixed()}%`}</span>
+      {!!value && <span className="">{`${value.toFixed()}%`}</span>}
     </li>
   );
 };

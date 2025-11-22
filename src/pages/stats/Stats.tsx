@@ -1,3 +1,4 @@
+import { StatsActivity } from "@/common/components/stats/StatsActivity";
 import { StatsCircleDiagram } from "@/common/components/stats/StatsCircleDiagram";
 import { StatsList } from "@/common/components/stats/StatsList";
 import { PeriodButton } from "@/common/components/ui/button/PeriodButton";
@@ -20,7 +21,7 @@ export const Stats = () => {
       {section === StatsEnum.SUMMARY ? (
         <StatsList />
       ) : section === StatsEnum.ACTIVITY ? (
-        <>Activity</>
+        <StatsActivity />
       ) : section === StatsEnum.DECISIONS ? (
         <StatsCircleDiagram />
       ) : (

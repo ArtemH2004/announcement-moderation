@@ -89,7 +89,7 @@ export const StatsCircleDiagram = () => {
         )}
       </h3>
 
-      <div className="flex-center gap-x-15 ">
+      <div className="flex-center flex-col gap-y-4 md:flex-row gap-x-6 lg:gap-x-15 ">
         {/* Круговая диаграмма */}
         <div className="relative size-65">
           <svg className="w-full h-full" viewBox="0 0 100 100">
@@ -140,7 +140,7 @@ export const StatsCircleDiagram = () => {
           </svg>
         </div>
 
-        <ul className="flex flex-col gap-y-3 w-1/5">
+        <ul className="flex flex-col gap-y-3 w-fit">
           {diagramData.map((item) => (
             <StatsDiagramItem
               key={item.title}
