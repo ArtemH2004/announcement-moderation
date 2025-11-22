@@ -8,6 +8,7 @@ import type { IStatsSummary } from "@/store/reducers/stats/types";
 import { statsApi } from "@/store/reducers/stats/statsApi";
 import { StatsItem } from "@/common/components/stats/StatsItem";
 import { millisecondsFormatter } from "@/common/helpers/timeFormatter";
+import { StatsListLoading } from "@/common/components/loading/stats/StatsListLoading";
 
 export const StatsList = () => {
   const period = useAppSelector((state) => state.statsReducer.period);
@@ -31,7 +32,7 @@ export const StatsList = () => {
     fetchData();
   }, [searchParams]);
 
-  if (loading) return <>loading</>;
+  if (loading) return <StatsListLoading />;
   if (!data) return <Empty />;
 
   const periodTitle = `Проверено ${formatPeriod.toLowerCase()}`;

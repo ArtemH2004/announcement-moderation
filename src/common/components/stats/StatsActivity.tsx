@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Empty } from "@/common/components/Empty";
 import { StatsDiagramItem } from "./StatsDiagramItem";
+import { TextLoading } from "@/common/components/loading/TextLoading";
 
 export const StatsActivity = () => {
   const period = useAppSelector((state) => state.statsReducer.period);
@@ -30,7 +31,7 @@ export const StatsActivity = () => {
     fetchData();
   }, [searchParams]);
 
-  if (loading) return <>loading</>;
+  if (loading) return <TextLoading sizeClassName="w-full h-97 rounded-xl"/>;
   if (!data) return <Empty />;
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);

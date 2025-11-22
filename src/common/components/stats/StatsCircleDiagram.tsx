@@ -7,6 +7,7 @@ import { useSearchParams } from "react-router-dom";
 import { statsApi } from "@/store/reducers/stats/statsApi";
 import type { PeriodEnum } from "@/common/enums/PeriodEnum";
 import { Empty } from "@/common/components/Empty";
+import { TextLoading } from "@/common/components/loading/TextLoading";
 
 export const StatsCircleDiagram = () => {
   const period = useAppSelector((state) => state.statsReducer.period);
@@ -30,7 +31,7 @@ export const StatsCircleDiagram = () => {
     fetchData();
   }, [searchParams]);
 
-  if (loading) return <>loading</>;
+  if (loading) return <TextLoading sizeClassName="w-full h-81 rounded-xl"/>;
   if (!data) return <Empty />;
 
   const diagramData = [

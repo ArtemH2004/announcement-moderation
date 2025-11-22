@@ -5,6 +5,7 @@ import { Empty } from "@/common/components/Empty";
 import type { IStatsCategories } from "@/store/reducers/stats/types";
 import { statsApi } from "@/store/reducers/stats/statsApi";
 import { StatsItem } from "@/common/components/stats/StatsItem";
+import { StatsListLoading } from "@/common/components/loading/stats/StatsListLoading";
 
 export const StatsCategoriesList = () => {
   const [data, setData] = useState<IStatsCategories[]>();
@@ -27,7 +28,7 @@ export const StatsCategoriesList = () => {
     fetchData();
   }, [searchParams]);
 
-  if (loading) return <>loading</>;
+  if (loading) return <StatsListLoading />;
   if (!data) return <Empty />;
 
   const arrayData = Object.entries(data).map(([key, value]) => ({
