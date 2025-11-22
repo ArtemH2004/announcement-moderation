@@ -8,7 +8,12 @@ export const api = axios.create({
 });
 
 const adsService = "/ads";
+const statsService = "/stats";
 
 export enum AdsServiceEndpoints {
   ALL = `${adsService}`,
+}
+
+export enum StatsServiceEndpoints {
+  SUMMARY = `${statsService}/summary`,
 }
