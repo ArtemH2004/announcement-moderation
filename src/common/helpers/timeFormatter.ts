@@ -11,7 +11,6 @@ export const timeFormatter = (dateString: string): string => {
   return `${day}.${month}.${year}, ${hours}:${minutes}`;
 };
 
-
 export const dateFormatter = (dateString: string): string => {
   const date = new Date(dateString);
 
@@ -20,4 +19,16 @@ export const dateFormatter = (dateString: string): string => {
   const year = date.getFullYear();
 
   return `${day}.${month}.${year}`;
+};
+
+export const millisecondsFormatter = (milliseconds: number): string => {
+  const totalSeconds = Math.floor(milliseconds / 1000);
+
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  const formattedMinutes = String(minutes).padStart(2, "0");
+  const formattedSeconds = String(seconds).padStart(2, "0");
+
+  return `${formattedMinutes}:${formattedSeconds}`;
 };
