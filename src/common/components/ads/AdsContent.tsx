@@ -12,7 +12,7 @@ import { PriorityEnum } from "@/common/enums/PriorityEnum";
 import SvgHelper from "@/common/components/svg-helper/SvgHelper";
 import { ButtonWithTextAndIcon } from "@/common/components/ui/button/ButtonWithTextAndIcon";
 import { adsApi } from "@/store/reducers/ads/adsApi";
-import { useState } from "react";
+import { memo, useState } from "react";
 import useClickOutRef from "@/common/hooks/useClickOutRef";
 import Dropdown from "@/common/components/dropdown/Dropdown";
 import { ActionDropdown } from "@/common/components/dropdown/ActionDropdown";
@@ -25,7 +25,7 @@ interface IAdsContentProps {
   ads: IAdsFullInfo;
 }
 
-export const AdsContent = ({ ads }: IAdsContentProps) => {
+export const AdsContent = memo(({ ads }: IAdsContentProps) => {
   const maxId = useAppSelector((state) => state.paginationReducer.totalItems);
   const [isRejectDropdownOpen, setRejectDropdownOpen] = useState(false);
   const [isEditDropdownOpen, setEditDropdownOpen] = useState(false);
@@ -176,4 +176,4 @@ export const AdsContent = ({ ads }: IAdsContentProps) => {
       </nav>
     </section>
   );
-};
+});

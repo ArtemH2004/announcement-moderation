@@ -22,18 +22,15 @@ export const adsApi = {
     const limitParam = checkParam("limit", limit);
     const searchParam = checkParam("search", search);
     const sortByParam = checkParam("sortBy", sortBy);
-    const sortOrderParam = !!sortByParam
-      ? checkParam("sortOrder", sortOrder)
-      : "";
-    const statusParams =
-      status?.map((s) => checkParam("status", s)).join("&") || "";
-    const minPriceParam = minPrice ? checkParam("minPrice", minPrice) : "";
-    const maxPriceParam = maxPrice ? checkParam("maxPrice", maxPrice) : "";
-    const categoryParams = categoryId ? checkParam("categoryId", categoryId) : "";
+    const sortOrderParam = checkParam("sortOrder", sortOrder);
+    const statusParams = status?.map((s) => checkParam("status", s)).join("&");
+    const minPriceParam = checkParam("minPrice", minPrice);
+    const maxPriceParam = checkParam("maxPrice", maxPrice);
+    const categoryParams = checkParam("categoryId", categoryId);
 
     try {
       const response = await api.get(
-        `${AdsServiceEndpoints.ALL}?${pageParam}&${limitParam}&${searchParam}&${sortByParam}&${sortOrderParam}&${statusParams}&${minPriceParam}&${maxPriceParam}&${categoryParams}`
+        `${AdsServiceEndpoints.ALL}?${pageParam}${limitParam}${searchParam}${sortByParam}${sortOrderParam}${statusParams}${minPriceParam}${maxPriceParam}${categoryParams}`
       );
       return response.data;
     } catch (error) {

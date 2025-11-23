@@ -9,6 +9,7 @@ interface IButtonWithTextAndIconProps {
   className?: string;
   onClick?: (e: any) => void;
   iconSecond?: boolean;
+  disabled?: boolean;
 }
 
 export const ButtonWithTextAndIcon = ({
@@ -16,9 +17,10 @@ export const ButtonWithTextAndIcon = ({
   iconName,
   color = "transparent",
   type = "button",
-  className ="",
+  className = "",
   onClick,
   iconSecond = false,
+  disabled = false,
 }: IButtonWithTextAndIconProps) => {
   const colorClassName =
     color === "red"
@@ -34,11 +36,14 @@ export const ButtonWithTextAndIcon = ({
       : "bg-transparent";
   return (
     <button
+      disabled={disabled}
       type={type}
       onClick={onClick}
       className={`flex-center gap-x-1 ${
         iconSecond ? "flex-row-reverse" : "flex-row"
-      } px-4 py-1 select-none rounded-lg ${colorClassName} ${className}`}
+      } px-4 py-1 select-none rounded-lg ${colorClassName} ${className} ${
+        disabled && "opacity-75 pointer-events-none"
+      }`}
     >
       {!!iconName && <SvgHelper iconName={iconName} size="20" />}
       <span className="font-medium text-lg">{title}</span>

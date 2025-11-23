@@ -1,12 +1,43 @@
 import { PaginationButton } from "@/common/components/ui/button/PaginationButton";
 import { useAppSelector } from "@/common/hooks/useAppSelector";
 import { useActions } from "@/store/actions";
+import { useSearchParams } from "react-router-dom";
 
 export const Pagination = () => {
   const { currentPage, totalPages } = useAppSelector(
     (state) => state.paginationReducer
   );
   const { setPage, nextPage, prevPage } = useActions();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const updatePageInSearchParams = (page: number) => {
+    const newSearchParams = new URLSearchParams(searchParams);
+
+    if (page === 1) {
+      newSearchParams.delete("page");
+    } else {
+      newSearchParams.set("page", page.toString());
+    }
+
+    setSearchParams(newSearchParams);
+  };
+
+  const handleSetPage = (page: number) => {
+    setPage(page);
+    updatePageInSearchParams(page);
+  };
+
+  const handleNextPage = () => {
+    const nextPageNumber = currentPage + 1;
+    nextPage();
+    updatePageInSearchParams(nextPageNumber);
+  };
+
+  const handlePrevPage = () => {
+    const prevPageNumber = currentPage - 1;
+    prevPage();
+    updatePageInSearchParams(prevPageNumber);
+  };
 
   if (totalPages <= 1) return null;
 
@@ -28,7 +59,7 @@ export const Pagination = () => {
       <PaginationButton
         title="Предыдущая страница"
         iconName="arrow_back"
-        onClick={() => prevPage()}
+        onClick={handlePrevPage}
         disabled={currentPage === 1}
       />
       {pages.map((item, index) =>
@@ -39,14 +70,14 @@ export const Pagination = () => {
             key={index}
             title={item.toString()}
             isActive={currentPage === item}
-            onClick={() => setPage(Number(item))}
+            onClick={() => handleSetPage(Number(item))}
           />
         )
       )}
       <PaginationButton
         title="Предыдущая страница"
         iconName="arrow_forward"
-        onClick={() => nextPage()}
+        onClick={handleNextPage}
         disabled={currentPage === totalPages}
       />
     </ul>
