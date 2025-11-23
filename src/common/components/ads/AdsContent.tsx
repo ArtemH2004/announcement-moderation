@@ -27,6 +27,8 @@ interface IAdsContentProps {
 }
 
 export const AdsContent = memo(({ ads }: IAdsContentProps) => {
+  document.title = ads.title;
+
   const maxId = useAppSelector((state) => state.paginationReducer.totalItems);
   const [isRejectDropdownOpen, setRejectDropdownOpen] = useState(false);
   const [isEditDropdownOpen, setEditDropdownOpen] = useState(false);
