@@ -11,12 +11,13 @@ import { PriorityEnum } from "@/common/enums/PriorityEnum";
 import { AdsImgSwiper } from "@/common/components/ads/AdsImgSwiper";
 import { useNavigate } from "react-router-dom";
 import { ERoutes } from "@/router/routes";
+import { memo } from "react";
 
 interface IAdsItemProps {
   ads: IAdsShortInfo;
 }
 
-export const AdsItem = ({ ads }: IAdsItemProps) => {
+export const AdsItem = memo(({ ads }: IAdsItemProps) => {
   const price = priceFormatter(ads.price);
   const time = timeFormatter(ads.createdAt);
   const status = statusFormatter(ads.status);
@@ -63,4 +64,4 @@ export const AdsItem = ({ ads }: IAdsItemProps) => {
       </article>
     </li>
   );
-};
+});
