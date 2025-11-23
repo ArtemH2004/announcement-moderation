@@ -17,6 +17,7 @@ export const FilterDropdown = ({ onApply }: IFilterDropdownProps) => {
   const [loading, setLoading] = useState(true);
   const [hasFetched, setHasFetched] = useState(false);
   const { setFilters, applyFilters, resetFilters } = useActions();
+  const [hasError, setError] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,14 +52,15 @@ export const FilterDropdown = ({ onApply }: IFilterDropdownProps) => {
       <div className="absolute z-10 right-4 top-4">
         <ResetButton onClick={() => resetFilters()} />
       </div>
-      <FilterWrapper type="status" list={filters.status} />
-      <FilterWrapper type="price" priceRange={filters.priceRange} />
-      <FilterWrapper type="category" list={filters.categories} />
+      <FilterWrapper type="status" list={filters.status} setError={setError} />
+      <FilterWrapper type="price" priceRange={filters.priceRange} setError={setError} />
+      <FilterWrapper type="category" list={filters.categories} setError={setError} />
       <ButtonWithTextAndIcon
         title="Применить"
         color="blue"
         onClick={handleApply}
         className="h-10 rounded-xl"
+        disabled={hasError}
       />
     </div>
   );

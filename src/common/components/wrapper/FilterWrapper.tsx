@@ -14,11 +14,13 @@ interface IFilterWrapperProps {
   type: "status" | "price" | "category";
   list?: StatusEnum[] | IFilterCategory[];
   priceRange?: IFilterPriceRange;
+  setError: (isError: boolean) => void;
 }
 export const FilterWrapper = ({
   type,
   list,
   priceRange,
+  setError,
 }: IFilterWrapperProps) => {
   const { current, applied } = useAppSelector((state) => state.filterReducer);
   const { updateStatus, updatePriceRange, updateCategory } = useActions();
@@ -36,7 +38,7 @@ export const FilterWrapper = ({
   const [maxPriceError, setMaxPriceError] = useState(false);
   const title =
     type === "status" ? "Статус" : type === "price" ? "Цена" : "Категории";
-  
+
   useEffect(() => {
     setMinPrice(applied?.priceRange.min.toString() ?? "");
     setMaxPrice(applied?.priceRange.max.toString() ?? "");
@@ -81,13 +83,12 @@ export const FilterWrapper = ({
     setMinPrice(newValue);
 
     setMinPriceError(validatePrice(newValue, maxPrice));
+    minPriceError ? setError(true) : setError(false);
 
-    if (minPriceError) {
-      updatePriceRange({
-        min: newValue ? newValue : "",
-        max: maxPrice,
-      });
-    }
+    updatePriceRange({
+      min: newValue,
+      max: maxPrice,
+    });
   };
 
   const handleMaxPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -95,13 +96,12 @@ export const FilterWrapper = ({
     setMaxPrice(newValue);
 
     setMaxPriceError(validatePrice(minPrice, newValue));
+    maxPriceError ? setError(true) : setError(false);
 
-    if (maxPriceError) {
-      updatePriceRange({
-        min: minPrice,
-        max: newValue ? newValue : "",
-      });
-    }
+    updatePriceRange({
+      min: minPrice,
+      max: newValue,
+    });
   };
 
   return (
