@@ -10,6 +10,8 @@ import { Empty } from "@/common/components/Empty";
 import { TextLoading } from "@/common/components/loading/TextLoading";
 
 export const StatsCircleDiagram = () => {
+  document.title = "График решений";
+
   const period = useAppSelector((state) => state.statsReducer.period);
   const formatPeriod = periodFormatter(period);
   const [data, setData] = useState<IStatsDecisions>();
@@ -31,7 +33,7 @@ export const StatsCircleDiagram = () => {
     fetchData();
   }, [searchParams]);
 
-  if (loading) return <TextLoading sizeClassName="w-full h-81 rounded-xl"/>;
+  if (loading) return <TextLoading sizeClassName="w-full h-81 rounded-xl" />;
   if (!data) return <Empty />;
 
   const diagramData = [
