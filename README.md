@@ -1,73 +1,197 @@
-# React + TypeScript + Vite
+# 🛡️ Announcement Moderation - Система модерации объявлений
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div align="center">
 
-Currently, two official plugins are available:
+**Современная платформа для эффективной модерации пользовательских объявлений**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Особенности](#-особенности) • [Технологии](#-технологии) • [Демо](#-демо) • [Установка](#-установка) • [Контакты](#-контакты)
 
-## React Compiler
+</div>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Особенности
 
-## Expanding the ESLint configuration
+### 🎯 Основной функционал
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **📋 Панель модерации** - Удобный просмотр всех объявлений с детальной информацией
+- **⚡ Быстрые действия** - Одобрение, отклонение или доработка объявлений в один клик
+- **📊 История модерации** - Полное отслеживание всех действий модератора для каждого объявления
+- **🏷️ Система статусов** - Поддержка различных состояний модерации
+- **🔍 Фильтрация** - Фильтрация объявлений по названию, статусам, цене и категориям
+- **💾 Автосохранение** - Сохранение состояния в локальном хранилище
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### ⚡ Технические преимущества
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **⚡ Высокая производительность** - Оптимизированная работа с большими объемами данных
+- **🎨 Современный UI** - Чистый и интуитивный интерфейс на Tailwind CSS
+- **📊 TypeScript** - Полная типобезопасность и надежность кода
+- **🔄 Управление состоянием** - Централизованное управление через Redux Toolkit
+- **📱 Адаптивный дизайн** - Идеальное отображение на всех устройствах
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠 Технологии
+
+<div align="center">
+
+| Технология        | Назначение            | Версия |
+| ----------------- | --------------------- | ------ |
+| **React**         | Библиотека UI         | 19.2.0 |
+| **TypeScript**    | Типизация             | 5.9.3  |
+| **Redux Toolkit** | Управление состоянием | 2.10.1 |
+| **Tailwind CSS**  | Стилизация            | 4.1.17 |
+| **Vite**          | Сборка и разработка   | 7.2.2  |
+
+</div>
+
+### 🔧 Дополнительные технологии
+
+- **React Router DOM** - Навигация между страницами
+- **Redux Remember** - Сохранение состояния в localStorage
+- **Axios** - HTTP-клиент для работы с API
+
+## 🎨 Демо
+
+### 📸 Скриншоты интерфейса
+
+##### 📋 Главная экран и список объявлений → ⚡ Детали объявления → 📊 Статистика
+
+<div align="center">
+Главная экран и список объявлений
+
+<div style="display: flex; justify-content: center; gap: 10px; margin: 20px 0;"> <img src="public/readme/image-1.png" width="50%" alt="Список объявлений"> <img src="public/readme/image-2.png" width="50%" alt="Фильтрация объявлений"> </div>
+Детали объявления
+
+<div style="display: flex; justify-content: center; gap: 10px; margin: 20px 0;"> <img src="public/readme/image-3.png" width="50%" alt="Детали объявления"> <img src="public/readme/image-4.png" width="50%" alt="Статистика модерации" > </div>
+Статистика
+
+<div style="display: flex; justify-content: center; margin: 20px 0;"> <img src="public/readme/image-5.png" width="50%" alt="Аналитика решений"> </div></div>
+
+### 🎯 Ключевые экраны
+
+- **Список объявлений `/list`** - Страница с карточками объявлений с фильтрацией и поиском
+- **Детали объявления `/item/:id`** - Полная информация для принятия решения
+- **Статистика `/stats`** - Аналитика и метрики модерации
+
+## 🚀 Установка и запуск
+
+### 📥 Установка
+
+```bash
+# Клонирование репозитория
+git clone https://github.com/ArtemH2004/announcement-moderation.git
+cd announcement-moderation
+
+# Установка зависимостей
+npm install
+# или
+yarn install
+# или
+pnpm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 🏃 Запуск приложения
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Режим разработки
+npm run dev
+# или
+yarn dev
+# или
+pnpm dev
 ```
+
+Приложение будет доступно по адресу: http://localhost:5173
+
+### 📁 Структура проекта
+
+```text
+announcement-moderation/
+├── node_modules/          # Зависимости проекта
+├── public/                # Статические файлы
+├── src/
+│   ├── api/              # API сервисы и HTTP-запросы
+│   ├── common/           # Общие модули
+│   |   ├── components/   # React компоненты
+│   |   ├── enums/        # Перечисления TypeScript
+│   |   ├── helpers/      # Вспомогательные функции
+│   |   ├── hooks/        # Кастомные хуки React
+│   |   └── styles/       # Стили и CSS
+│   ├── pages/            # Страницы приложения
+│   │   ├── item/         # Страница объявления
+│   │   ├── list/         # Список объявлений
+│   │   └── stats/        # Статистика
+│   ├── router/           # Навигация и маршрутизация
+│   ├── store/            # Redux хранилища состояния
+│   │   ├── reducers/     # Редюсеры
+│   │   ├── actions.ts    # Экшены
+│   │   └── store.ts      # Конфигурация store
+│   ├── App.tsx           # Корневой компонент
+│   └── main.tsx          # Точка входа
+├── .gitignore            # Git ignore правила
+├── eslint.config.js      # Конфигурация ESLint
+├── index.html            # HTML шаблон
+├── package.json          # Зависимости и скрипты проекта
+├── package-lock.json     # Лок файл зависимостей
+├── README.md             # Основная документация
+├── tsconfig.app.json     # Конфигурация TypeScript для приложения
+├── tsconfig.json         # Основная конфигурация TypeScript
+├── tsconfig.node.json    # Конфигурация TypeScript для Node.js
+└── vite.config.ts        # Конфигурация Vite
+```
+
+### 🎯 Основные компоненты
+
+#### 🛡️ Moderation System
+
+```text
+List.tsx - Страница списка объявлений
+
+Item.tsx - Страница объявления
+
+Stats.tsx - Станица статистики модерации по категориям
+```
+
+#### 📊 Dashboard & Analytics
+
+```text
+StatsList - Панель общей статистики
+
+StatsActivity - Панель графика активности
+
+StatsCircleDiagram - Панель графика решений
+
+StatsActivity - Панель графика по категориям
+
+StatsCategoriesList - Очередь объявлений на модерацию
+```
+
+#### 🎪 UI Components
+
+```text
+Button - Универсальный компонент кнопки
+
+Dropdown - Модальные окна для различных действий
+
+Toggle - Переключатель секций статистики
+
+Pagination - Пагинация для больших списков
+```
+
+### 🔧 Разработка
+
+#### 🏗 Архитектура проекта
+
+Проект построен по принципам Feature-Sliced Design с четким разделением ответственности:
+
+- **Components** - Переиспользуемые UI компоненты
+
+- **Pages** - Страницы приложения
+
+- **Store** - Управление состоянием через Redux Toolkit
+
+- **Hooks** - Кастомные хуки для бизнес-логики
+
+### 📞 Контакты
+
+#### 👨‍💻 Автор проекта
+
+Артем - Frontend Developer
+https://t.me/artemh2004
