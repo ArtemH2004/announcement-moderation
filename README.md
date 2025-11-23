@@ -56,13 +56,13 @@
 <div align="center">
 Главная экран и список объявлений
 
-<div style="display: flex; justify-content: center; gap: 10px; margin: 20px 0;"> <img src="public/readme/image-1.png" width="50%" alt="Список объявлений"> <img src="public/readme/image-2.png" width="50%" alt="Фильтрация объявлений"> </div>
+<div style="display: flex; flex-direction: column; justify-content: center; gap: 10px; margin: 20px 0;"> <img src="public/readme/image-1.png" alt="Список объявлений"> <img src="public/readme/image-2.png" alt="Фильтрация объявлений"> </div>
 Детали объявления
 
-<div style="display: flex; justify-content: center; gap: 10px; margin: 20px 0;"> <img src="public/readme/image-3.png" width="50%" alt="Детали объявления"> <img src="public/readme/image-4.png" width="50%" alt="Статистика модерации" > </div>
+<div style="display: flex; flex-direction: column; justify-content: center; gap: 10px; margin: 20px 0;"> <img src="public/readme/image-3.png" alt="Детали объявления"> </div>
 Статистика
 
-<div style="display: flex; justify-content: center; margin: 20px 0;"> <img src="public/readme/image-5.png" width="50%" alt="Аналитика решений"> </div></div>
+<div style="display: flex; flex-direction: column;justify-content: center; margin: 20px 0;"> <img src="public/readme/image-4.png" alt="Статистика модерации" > <img src="public/readme/image-5.png" alt="Аналитика решений"> </div></div>
 
 ### 🎯 Ключевые экраны
 
