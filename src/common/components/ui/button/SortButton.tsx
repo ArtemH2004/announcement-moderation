@@ -36,7 +36,7 @@ export const SortButton = () => {
         onClick={toggleDropdown}
       >
         <SvgHelper size="15" iconName="sort" />
-        <span className="text-sm">
+        <span className="text-sm text-nowrap">
           {sort === "По умолчанию" ? "Сортировка" : sort}
         </span>
         <SvgHelper
@@ -48,7 +48,7 @@ export const SortButton = () => {
         />
       </button>
 
-      <Dropdown isOpen={isDropdownOpen}>
+      <Dropdown isOpen={isDropdownOpen} position="right">
         <SortDropdown />
       </Dropdown>
     </div>

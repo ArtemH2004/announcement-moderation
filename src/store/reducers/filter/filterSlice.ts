@@ -1,5 +1,9 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { IFilter, IFilterCategory } from "@/store/reducers/filter/types";
+import type {
+  IFilter,
+  IFilterCategory,
+  IFilterPriceRange,
+} from "@/store/reducers/filter/types";
 import type { IAdsFullInfo } from "@/store/reducers/ads/types";
 import type { StatusEnum } from "@/common/enums/StatusEnum";
 
@@ -14,8 +18,8 @@ const initialFilters: IFilter = {
   search: "",
   status: [],
   priceRange: {
-    min: 0,
-    max: 0,
+    min: "",
+    max: "",
   },
   categories: [],
 };
@@ -62,25 +66,49 @@ const filterSlice = createSlice({
         search: "",
         status: statuses,
         priceRange: {
-          min: minPrice,
-          max: maxPrice,
+          min: minPrice.toString(),
+          max: maxPrice.toString(),
         },
         categories: categories,
       };
 
       state.current = {
         search: "",
-        status: statuses,
+        status: [],
         priceRange: {
-          min: minPrice,
-          max: maxPrice,
+          min: minPrice.toString(),
+          max: maxPrice.toString(),
         },
         categories: [],
       };
     },
 
     updateStatus: (state, action: PayloadAction<StatusEnum>) => {
-      state.current.status.push(action.payload);
+      const statusIndex = state.current.status.findIndex(
+        (status) => status === action.payload
+      );
+
+      if (statusIndex !== -1) {
+        state.current.status.splice(statusIndex, 1);
+      } else {
+        state.current.status.push(action.payload);
+      }
+    },
+
+    updateCategory: (state, action: PayloadAction<IFilterCategory>) => {
+      const categoryIndex = state.current.categories.findIndex(
+        (category) => category.id === action.payload.id
+      );
+
+      if (categoryIndex !== -1) {
+        state.current.categories.splice(categoryIndex, 1);
+      } else {
+        state.current.categories = [action.payload];
+      }
+    },
+
+    updatePriceRange: (state, action: PayloadAction<IFilterPriceRange>) => {
+      state.current.priceRange = action.payload;
     },
 
     updateSearch: (state, action: PayloadAction<string>) => {
@@ -92,47 +120,14 @@ const filterSlice = createSlice({
       state.isApplied = true;
     },
 
+    resetFilters: (state) => {
+      state.current = { ...initialFilters };
+      state.applied = null;
+      state.isApplied = false;
+    },
+
     resetFilter: () => initialState,
   },
 });
 
 export const { actions: filterActions, reducer: filterReducer } = filterSlice;
-
-//   updateCityFilter: (state, action: PayloadAction<string | null>) => {
-//       state.current.city = action.payload;
-//     },
-
-//     updateGenderFilter: (state, action: PayloadAction<GenderType | null>) => { // Добавил null
-//       state.current.gender = action.payload;
-//     },
-
-//     updateAgeFilter: (state, action: PayloadAction<[number, number]>) => {
-//       state.current.ages = action.payload;
-//     },
-
-//     addTagFilter: (state, action: PayloadAction<string>) => {
-//       const tagExists = state.current.tags.some(tag => tag === action.payload);
-//       if (!tagExists) {
-//         state.current.tags.push(action.payload);
-//       }
-//     },
-
-//     removeTagFilter: (state, action: PayloadAction<string>) => {
-//       state.current.tags = state.current.tags.filter(tag => tag !== action.payload);
-//     },
-
-//     applyFilters: (state) => {
-//       state.applied = { ...state.current };
-//       state.isApplied = true;
-//     },
-
-//     resetFilters: (state) => {
-//       state.current = { ...initialFilters };
-//       state.applied = null;
-//       state.isApplied = false;
-//     },
-
-//     replaceFilters: (state, action: PayloadAction<Partial<IHomeFilters>>) => {
-//       state.current = { ...state.current, ...action.payload };
-//       state.isApplied = false;
-//     },

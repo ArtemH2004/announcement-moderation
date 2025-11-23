@@ -4,6 +4,7 @@ import { api } from "@/api/api.ts";
 import type { SortEnum } from "@/common/enums/SortEnum";
 import { checkParam } from "@/common/helpers/checkParam";
 import type { IAdsAction } from "@/store/reducers/ads/types";
+import type { StatusEnum } from "@/common/enums/StatusEnum";
 
 export const adsApi = {
   async getAll(
@@ -11,7 +12,11 @@ export const adsApi = {
     limit: number,
     search: string,
     sortBy?: SortEnum,
-    sortOrder?: "asc" | "desc"
+    sortOrder?: "asc" | "desc",
+    status?: StatusEnum[],
+    minPrice?: string,
+    maxPrice?: string,
+    categoryId?: string
   ) {
     const pageParam = checkParam("page", page);
     const limitParam = checkParam("limit", limit);
@@ -20,10 +25,15 @@ export const adsApi = {
     const sortOrderParam = !!sortByParam
       ? checkParam("sortOrder", sortOrder)
       : "";
+    const statusParams =
+      status?.map((s) => checkParam("status", s)).join("&") || "";
+    const minPriceParam = minPrice ? checkParam("minPrice", minPrice) : "";
+    const maxPriceParam = maxPrice ? checkParam("maxPrice", maxPrice) : "";
+    const categoryParams = categoryId ? checkParam("categoryId", categoryId) : "";
 
     try {
       const response = await api.get(
-        `${AdsServiceEndpoints.ALL}?${pageParam}&${limitParam}&${searchParam}&${sortByParam}&${sortOrderParam}`
+        `${AdsServiceEndpoints.ALL}?${pageParam}&${limitParam}&${searchParam}&${sortByParam}&${sortOrderParam}&${statusParams}&${minPriceParam}&${maxPriceParam}&${categoryParams}`
       );
       return response.data;
     } catch (error) {
@@ -71,7 +81,8 @@ export const adsApi = {
       );
       return response.data;
     } catch (error) {
-      if (axios.isAxiosError(error)) throw new Error("Объявление не доработано");
+      if (axios.isAxiosError(error))
+        throw new Error("Объявление не доработано");
     }
   },
 

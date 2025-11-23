@@ -1,8 +1,8 @@
 import type { StatusEnum } from "@/common/enums/StatusEnum";
 
 export interface IFilterPriceRange {
-  min: number;
-  max: number;
+  min: string;
+  max: string;
 }
 
 export interface IFilterCategory {
