@@ -25,7 +25,7 @@ export const FilterButton = () => {
       </button>
 
       <Dropdown isOpen={isDropdownOpen} position="right">
-        <FilterDropdown />
+        <FilterDropdown onApply={handleClose} />
       </Dropdown>
     </div>
   );

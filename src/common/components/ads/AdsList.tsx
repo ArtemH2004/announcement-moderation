@@ -9,6 +9,8 @@ import { SortButton } from "@/common/components/ui/button/SortButton";
 import { useSearchParams } from "react-router-dom";
 import type { SortEnum, SortOrderEnum } from "@/common/enums/SortEnum";
 import { Empty } from "@/common/components/Empty";
+import { FilterList } from "@/common/components/filter/FilterList";
+import type { StatusEnum } from "@/common/enums/StatusEnum";
 
 export const AdsList = () => {
   const pagination = useAppSelector((state) => state.paginationReducer);
@@ -26,7 +28,11 @@ export const AdsList = () => {
           pagination.itemsPerPage,
           (searchParams.get("search") as string) ?? undefined,
           (searchParams.get("sortBy") as SortEnum) ?? undefined,
-          (searchParams.get("sortOrder") as SortOrderEnum) ?? undefined
+          (searchParams.get("sortOrder") as SortOrderEnum) ?? undefined,
+          (searchParams.getAll("status") as StatusEnum[]) ?? undefined,
+          (searchParams.get("minPrice")) ?? undefined,
+          (searchParams.get("maxPrice")) ?? undefined,
+          (searchParams.get("categoryId")) ?? undefined,
         );
         setPagination(response.pagination);
         setData(response.ads);
@@ -47,7 +53,10 @@ export const AdsList = () => {
         Найдено объявлений:{" "}
         <strong className="text-gray-400">{pagination.totalItems}</strong>
       </h2>
-      <SortButton />
+      <div className="flex items-center justify-between gap-x-4">
+        <FilterList />
+        <SortButton />
+      </div>
       {!!data && data?.length !== 0 ? (
         <ul className="grid grid-cols-1 xl:grid-cols-2 gap-4">
           {data.map((item) => (
