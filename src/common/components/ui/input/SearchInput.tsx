@@ -1,10 +1,12 @@
 import { useAppSelector } from "@/common/hooks/useAppSelector";
+import { useHotkey } from "@/common/hooks/useHotKey";
 import { useActions } from "@/store/actions";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 export const SearchInput = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const searchValue = useAppSelector(
     (state) => state.filterReducer.applied?.search
@@ -32,18 +34,25 @@ export const SearchInput = () => {
     setSearchParams(newSearchParams);
   };
 
+  useHotkey({
+    "focus-search": () => {
+      inputRef.current?.focus();
+    },
+  });
+
   return (
     <div className="w-full h-10 flex-center gap-x-0.5 bg-blue-400 rounded-lg p-0.5">
       <label htmlFor="search" className="visually-hidden">
         Поиск объявления
       </label>
       <input
+        ref={inputRef}
         id="search"
         type="text"
         value={search}
         onChange={handleChange}
         placeholder="Поиск по объявлениям"
-        className="w-full h-full bg-white rounded-md px-4 placeholder:text-gray-500 outline-0"
+        className="w-full h-full bg-white rounded-md px-4 placeholder:text-gray-500 "
       />
       <button
         className="w-25 h-full rounded-lg flex-center hover:bg-blue-500 active:bg-blue-600"
