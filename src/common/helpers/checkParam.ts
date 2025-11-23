@@ -3,7 +3,7 @@ export const checkParam = (
   value?: string | number | null
 ): string => {
   if (!!value) {
-    return `${key}=${value}`;
+    return `${key}=${value}&`;
   }
 
   return "";
