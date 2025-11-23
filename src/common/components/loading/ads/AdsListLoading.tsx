@@ -1,6 +1,7 @@
 import { AdsItemLoading } from "@/common/components/loading/ads/AdsItemLoading";
 import { TextLoading } from "@/common/components/loading/TextLoading";
 import { SortButton } from "@/common/components/ui/button/SortButton";
+import { FilterListLoading } from "@/common/components/loading/filter/FilterListLoading";
 
 export const AdsListLoading = () => {
   const list = Array.from({ length: 8 });
@@ -11,7 +12,10 @@ export const AdsListLoading = () => {
         <h2 className="text-xl xs:text-2xl md:text-3xl">Найдено объявлений:</h2>
         <TextLoading sizeClassName="w-9 h-4.5 xs:w-11 xs:h-6 md:w-14 md:h-7" />
       </div>
-      <SortButton />
+      <div className="flex items-center justify-between gap-x-4">
+        <FilterListLoading />
+        <SortButton />
+      </div>
       <ul className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         {list.map((_, index) => (
           <AdsItemLoading key={index} />
