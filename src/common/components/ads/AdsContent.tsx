@@ -20,6 +20,7 @@ import { ActionEnum } from "@/common/enums/ActionEnum";
 import { NavigationLink } from "@/common/components/ui/link/NavigationLink";
 import { ERoutes } from "@/router/routes";
 import { useAppSelector } from "@/common/hooks/useAppSelector";
+import { useHotkey } from "@/common/hooks/useHotKey";
 
 interface IAdsContentProps {
   ads: IAdsFullInfo;
@@ -80,6 +81,25 @@ export const AdsContent = memo(({ ads }: IAdsContentProps) => {
   const handleEditClose = () => {
     isEditDropdownOpen && setEditDropdownOpen(false);
   };
+
+  const handleNextAd = () => {
+    if (ads.id !== maxId) {
+      navigate(`${ERoutes.ITEM}/${ads.id + 1}`);
+    }
+  };
+
+  const handlePrevAd = () => {
+    if (ads.id !== 1) {
+      navigate(`${ERoutes.ITEM}/${ads.id - 1}`);
+    }
+  };
+
+  useHotkey({
+    approve: handleApproveClick,
+    reject: handleRejectClick,
+    next: handleNextAd,
+    prev: handlePrevAd,
+  });
 
   const rejectRef = useClickOutRef<HTMLDivElement>(handleRejectClose);
   const editRef = useClickOutRef<HTMLDivElement>(handleEditClose);
