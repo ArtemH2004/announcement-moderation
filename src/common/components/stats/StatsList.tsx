@@ -11,6 +11,8 @@ import { millisecondsFormatter } from "@/common/helpers/timeFormatter";
 import { StatsListLoading } from "@/common/components/loading/stats/StatsListLoading";
 
 export const StatsList = () => {
+  document.title = "Общая статистика";
+
   const period = useAppSelector((state) => state.statsReducer.period);
   const formatPeriod = periodFormatter(period);
   const [data, setData] = useState<IStatsSummary>();

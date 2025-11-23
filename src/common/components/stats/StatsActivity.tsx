@@ -10,6 +10,8 @@ import { StatsDiagramItem } from "./StatsDiagramItem";
 import { TextLoading } from "@/common/components/loading/TextLoading";
 
 export const StatsActivity = () => {
+  document.title = "График активности";
+
   const period = useAppSelector((state) => state.statsReducer.period);
   const formatPeriod = periodFormatter(period);
   const [data, setData] = useState<IStatsActivity[]>();
@@ -31,7 +33,7 @@ export const StatsActivity = () => {
     fetchData();
   }, [searchParams]);
 
-  if (loading) return <TextLoading sizeClassName="w-full h-97 rounded-xl"/>;
+  if (loading) return <TextLoading sizeClassName="w-full h-97 rounded-xl" />;
   if (!data) return <Empty />;
   const formatDate = (dateString: string): string => {
     const date = new Date(dateString);

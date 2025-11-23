@@ -8,6 +8,8 @@ import { StatsItem } from "@/common/components/stats/StatsItem";
 import { StatsListLoading } from "@/common/components/loading/stats/StatsListLoading";
 
 export const StatsCategoriesList = () => {
+  document.title = "График по категориям";
+
   const [data, setData] = useState<IStatsCategories[]>();
   const [loading, setLoading] = useState(true);
   const [searchParams] = useSearchParams();
